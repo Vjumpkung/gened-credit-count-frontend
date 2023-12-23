@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import NextImage from "next/image";
 import Swal from "sweetalert2";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [username, setUsername] = useState<string>("");
@@ -120,6 +121,7 @@ export default function Home() {
           for educational purposes only.
         </span>
       </form>
+      <Footer />
     </main>
   );
 }
