@@ -1,10 +1,12 @@
+import GenEdCard from "@/components/GenEdCard";
 import { components } from "@/schema";
 import { apiService } from "@/services/apiservice";
+import { Button } from "@nextui-org/react";
 import { jwtDecode, JwtPayload } from "jwt-decode";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function gened() {
+export default function GenEd() {
   const router = useRouter();
   const [gened, setGened] = useState<components["schemas"]["GenEdResponseDto"]>(
     {
@@ -40,17 +42,47 @@ export default function gened() {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <code>{JSON.stringify(gened)}</code>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={() => {
-          localStorage.removeItem("token");
-          router.push("/");
-        }}
-      >
-        Logout
-      </button>
+    <div className="flex min-h-screen flex-col items-center justify-between px-2 py-2">
+      <div className="flex flex-col items-center justify-center gap-4 w-full m-auto max-w-screen-md px-2">
+        <title>KU GenEd Credit Count - Result Page</title>
+        <GenEdCard
+          title="กลุ่มสาระอยู่ดีมีสุข"
+          credit={gened.Wellness}
+          max_credit={6}
+        />
+        <GenEdCard
+          title="กลุ่มสาระศาสตร์แห่งผู้ประกอบการ"
+          credit={gened.Entrepreneurship}
+          max_credit={3}
+        />
+        <GenEdCard
+          title="กลุ่มสาระพลเมืองไทยและพลเมืองโลก"
+          credit={gened.Thai_Citizen_and_Global_Citizen}
+          max_credit={5}
+        />
+        <GenEdCard
+          title="กลุ่มสาระภาษากับการสื่อสาร"
+          credit={gened.Language_and_Communication}
+          max_credit={13}
+        />
+        <GenEdCard
+          title="กลุ่มสาระสุนทรียศาสตร์"
+          credit={gened.Aesthetics}
+          max_credit={3}
+        />
+        <GenEdCard title="วิชาเสรี" credit={gened.Others} max_credit={6} />
+        <Button
+          className="font-bold text-xl"
+          size="lg"
+          color="primary"
+          onClick={() => {
+            localStorage.removeItem("token");
+            router.push("/");
+          }}
+        >
+          Logout
+        </Button>
+      </div>
     </div>
   );
 }
