@@ -43,7 +43,7 @@ export default function GenEdCard({
         <div className="w-full">
           {subject_list.map((subject) => {
             return (
-              <div className="flex">
+              <div className="flex" key={subject.subject_code}>
                 <div className="flex-none pr-4">
                   <p className="font-bold">{subject.subject_code}</p>
                 </div>
