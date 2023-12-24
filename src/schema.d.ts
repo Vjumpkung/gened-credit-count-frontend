@@ -10,8 +10,12 @@ export interface paths {
     post: operations["login_login__post"];
   };
   "/gened/": {
-    /** Gened */
-    get: operations["gened_gened__get"];
+    /** Getgenedcredit */
+    get: operations["getGenEdCredit_gened__get"];
+  };
+  "/gened/subjectlist": {
+    /** Subjectlist */
+    get: operations["subjectlist_gened_subjectlist_get"];
   };
 }
 
@@ -46,22 +50,31 @@ export interface components {
       /** Password */
       password: string;
     };
-    /** LoginResponseDto */
-    LoginResponseDto: {
-      /** Code */
-      code: string;
-      /** Message */
-      message: string;
-      /** Accesstoken */
-      accesstoken: string;
-      /** Renewtoken */
-      renewtoken: string;
-      /** User */
-      user: Record<string, never>;
-      /** Rolemenus */
-      roleMenus: unknown[];
-      /** Cache */
-      cache: boolean;
+    /** SubjectDto */
+    SubjectDto: {
+      /** Subject Code */
+      subject_code: string;
+      /** Subject Name En */
+      subject_name_en: string;
+      /** Subject Name Th */
+      subject_name_th: string;
+      /** Credits */
+      credits: number;
+    };
+    /** SubjectListResponseDto */
+    SubjectListResponseDto: {
+      /** Wellness */
+      Wellness: components["schemas"]["SubjectDto"][];
+      /** Entrepreneurship */
+      Entrepreneurship: components["schemas"]["SubjectDto"][];
+      /** Thai Citizen And Global Citizen */
+      Thai_Citizen_and_Global_Citizen: components["schemas"]["SubjectDto"][];
+      /** Language And Communication */
+      Language_and_Communication: components["schemas"]["SubjectDto"][];
+      /** Aesthetics */
+      Aesthetics: components["schemas"]["SubjectDto"][];
+      /** Others */
+      Others: components["schemas"]["SubjectDto"][];
     };
     /** ValidationError */
     ValidationError: {
@@ -97,7 +110,7 @@ export interface operations {
       /** @description Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["LoginResponseDto"];
+          "application/json": unknown;
         };
       };
       /** @description Validation Error */
@@ -108,8 +121,8 @@ export interface operations {
       };
     };
   };
-  /** Gened */
-  gened_gened__get: {
+  /** Getgenedcredit */
+  getGenEdCredit_gened__get: {
     parameters: {
       query: {
         stdid: string;
@@ -123,6 +136,31 @@ export interface operations {
       200: {
         content: {
           "application/json": components["schemas"]["GenEdResponseDto"];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        content: {
+          "application/json": components["schemas"]["HTTPValidationError"];
+        };
+      };
+    };
+  };
+  /** Subjectlist */
+  subjectlist_gened_subjectlist_get: {
+    parameters: {
+      query: {
+        stdid: string;
+      };
+      header?: {
+        "x-access-token"?: string | null;
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        content: {
+          "application/json": components["schemas"]["SubjectListResponseDto"];
         };
       };
       /** @description Validation Error */

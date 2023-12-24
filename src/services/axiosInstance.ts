@@ -33,4 +33,19 @@ export class ApiService {
         return res.data;
       });
   };
+
+  listSubject = (stdid: string, token: string) => {
+    return this.instance
+      .get("/gened/subjectlist", {
+        params: {
+          stdid: stdid,
+        },
+        headers: {
+          "x-access-token": token,
+        },
+      })
+      .then((res: AxiosResponse) => {
+        return res.data;
+      });
+  };
 }
