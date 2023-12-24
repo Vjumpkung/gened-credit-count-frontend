@@ -35,7 +35,7 @@ export default function GenEd() {
       const decoded: JwtPayload & { idcode: string } = jwtDecode(token);
 
       if (
-        (decoded ? (decoded.exp ? decoded.exp * 1000 : 0) : 0) <
+        (decoded ? (decoded.exp ? decoded.exp : 0) : 0) <
         Math.floor(Date.now() / 1000)
       ) {
         localStorage.removeItem("token");
