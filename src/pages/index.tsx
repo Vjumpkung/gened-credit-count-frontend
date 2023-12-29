@@ -69,7 +69,9 @@ export default function Home() {
   }
 
   return (
-    <main className={`flex min-h-screen flex-col items-center justify-between`}>
+    <main
+      className={`fixed top-0 bottom-0 right-0 left-0 flex min-h-screen flex-col items-center justify-between`}
+    >
       <title>KU GenEd Credit Count - Login Page</title>
       <form className="flex flex-col items-center justify-center gap-4 w-full max-w-xl m-auto px-2">
         <Image
